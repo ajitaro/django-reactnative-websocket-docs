@@ -7,6 +7,13 @@ Documentation for making realtime app using django as backend and react native a
 
 To resolve the "java.security.cert.CertPathValidatorException: Trust anchor for certification path not found" error, you need to obtain a valid SSL/TLS certificate from a trusted Certificate Authority (CA) like Let's Encrypt or a commercial CA. Make sure the certificate is properly configured on your WebSocket server.
 
+```
+openssl s_client -showcerts -connect your.domain.com:443 < /dev/null
+```
+
+Copy the certificate starting from **-----BEGIN CERTIFICATE-----** to **-----END CERTIFICATE-----**, and save it as **server.crt**.
+
+
 ### 2. Include the SSL Certificate in Your Android Project
 
 - Place the `server.crt` certificate file in the `android/app/src/main/res/raw/` directory of your Android project.
@@ -22,15 +29,13 @@ Inside `network_security_config.xml`, add the following lines to include the `se
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
 <network-security-config>
-    <base-config>
+    <domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="true">YOUR_IP_ADDRESS</domain><!-- Debug port -->
+        <domain includeSubdomains="true">your_website.com</domain>
         <trust-anchors>
-            <!-- System trust anchors -->
-            <certificates src="system" />
-
-            <!-- User-added certificates -->
             <certificates src="@raw/server" />
         </trust-anchors>
-    </base-config>
+    </domain-config>
 </network-security-config>
 ```
 
