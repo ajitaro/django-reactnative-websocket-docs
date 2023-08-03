@@ -1,4 +1,4 @@
-# django-reactnative-websocket
+# django-reactnative-websocket-docs
 Documentation for making realtime app using django as backend and react native as frontend
 
 # Error after deployment
@@ -43,7 +43,7 @@ Inside `network_security_config.xml`, add the following lines to include the `se
 
 In the android/app/src/main/AndroidManifest.xml file, add the following line to reference the network security configuration:
 
-```
+```xml
 <application
     ...
     android:networkSecurityConfig="@xml/network_security_config"
