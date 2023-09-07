@@ -16,6 +16,12 @@ openssl s_client -showcerts -connect your.domain.com:443 < /dev/null
 ```
 
 Copy the certificate starting from **-----BEGIN CERTIFICATE-----** to **-----END CERTIFICATE-----**, and save it as **server.crt**.
+```
+1 s:C = US, O = Let's Encrypt, CN = R3
+i:C = US, O = Internet Security Research Group, CN = ISRG Root X1
+a:PKEY: rsaEncryption, 2048 (bit); sigalg: RSA-SHA256
+v:NotBefore: Sep  4 00:00:00 2020 GMT; NotAfter: Sep 15 16:00:00 2025 GMT
+```
 
 
 ### 2. Include the SSL Certificate in Your Android Project
