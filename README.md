@@ -40,6 +40,8 @@ Inside `network_security_config.xml`, add the following lines to include the `se
 <?xml version="1.0" encoding="utf-8"?>
 <network-security-config>
     <domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="true">10.0.2.2</domain><!-- debugger -->
+        <domain includeSubdomains="false">localhost</domain><!-- Debug port without local server -->
         <domain includeSubdomains="true">YOUR_IP_ADDRESS</domain><!-- Debug port -->
         <domain includeSubdomains="true">your_website.com</domain>
         <trust-anchors>
