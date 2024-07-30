@@ -3,7 +3,7 @@ Documentation for making realtime app using django as backend and react native a
 
 Follow the step from https://github.com/mitchtabian/HOWTO-django-channels-daphne
 
-Thank you to [mitchtabian](https://github.com/mitchtabian) !!!
+Thank you to [mitchtabian](https://github.com/mitchtabian) !!!!
 
 # Error after deployment
 
