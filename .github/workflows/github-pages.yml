@@ -5,6 +5,10 @@ on:
     branches:
       - main # Adjust this to the branch you want to deploy from
 
+permissions:
+  pages: write # Allow the workflow to write to GitHub Pages
+  id-token: write # Allow the workflow to write an ID token
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
