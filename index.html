@@ -1,0 +1,52 @@
+<h1 id="djangoreactnativewebsocketdocs">django-reactnative-websocket-docs</h1>
+<p>Documentation for making realtime app using django as backend and react native as frontend</p>
+<p>Follow the step from https://github.com/mitchtabian/HOWTO-django-channels-daphne</p>
+<p>Thank you to <a href="https://github.com/mitchtabian">mitchtabian</a> !!!!</p>
+<h1 id="errorafterdeployment">Error after deployment</h1>
+<h3 id="1obtainatrustedssltlscertificate">1. Obtain a Trusted SSL/TLS Certificate</h3>
+<p>To resolve the "java.security.cert.CertPathValidatorException: Trust anchor for certification path not found" error, you need to obtain a valid SSL/TLS certificate from a trusted Certificate Authority (CA) like Let's Encrypt or a commercial CA. Make sure the certificate is properly configured on your WebSocket server.</p>
+<pre><code>openssl s_client -showcerts -connect your.domain.com:443 &lt; /dev/null
+</code></pre>
+<p>Copy the certificate starting from <strong>-----BEGIN CERTIFICATE-----</strong> to <strong>-----END CERTIFICATE-----</strong>, and save it as <strong>server.crt</strong>.</p>
+<pre><code>1 s:C = US, O = Let's Encrypt, CN = R3
+i:C = US, O = Internet Security Research Group, CN = ISRG Root X1
+a:PKEY: rsaEncryption, 2048 (bit); sigalg: RSA-SHA256
+v:NotBefore: Sep  4 00:00:00 2020 GMT; NotAfter: Sep 15 16:00:00 2025 GMT
+</code></pre>
+<h3 id="2includethesslcertificateinyourandroidproject">2. Include the SSL Certificate in Your Android Project</h3>
+<ul>
+<li>Place the <code>server.crt</code> certificate file in the <code>android/app/src/main/res/raw/</code> directory of your Android project.</li>
+</ul>
+<h3 id="3configurenetworksecurityforandroid">3. Configure Network Security for Android</h3>
+<ul>
+<li>Create a file named <code>network_security_config.xml</code> in the <code>android/app/src/main/res/xml/</code> directory.</li>
+</ul>
+<h3 id="4addthecertificatetothenetworksecurityconfiguration">4. Add the Certificate to the Network Security Configuration</h3>
+<p>Inside <code>network_security_config.xml</code>, add the following lines to include the <code>server.crt</code> certificate:</p>
+<pre><code class="xml language-xml">&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;network-security-config&gt;
+    &lt;domain-config cleartextTrafficPermitted="true"&gt;
+        &lt;domain includeSubdomains="true"&gt;10.0.2.2&lt;/domain&gt;&lt;!-- debugger --&gt;
+        &lt;domain includeSubdomains="false"&gt;localhost&lt;/domain&gt;&lt;!-- Debug port without local server --&gt;
+        &lt;domain includeSubdomains="true"&gt;YOUR_IP_ADDRESS&lt;/domain&gt;&lt;!-- Debug port --&gt;
+        &lt;domain includeSubdomains="true"&gt;your_website.com&lt;/domain&gt;
+        &lt;trust-anchors&gt;
+            &lt;certificates src="@raw/server" /&gt;
+        &lt;/trust-anchors&gt;
+    &lt;/domain-config&gt;
+&lt;/network-security-config&gt;
+</code></pre>
+<h3 id="5referencethenetworksecurityconfigurationinandroidmanifestxml">5. Reference the Network Security Configuration in AndroidManifest.xml</h3>
+<p>In the android/app/src/main/AndroidManifest.xml file, add the following line to reference the network security configuration:</p>
+<pre><code class="xml language-xml">&lt;application
+    ...
+    android:networkSecurityConfig="@xml/network_security_config"
+    ...&gt;
+</code></pre>
+<h3 id="6cleanandrebuildtheandroidproject">6. Clean and Rebuild the Android Project</h3>
+<pre><code>cd android
+./gradlew clean
+</code></pre>
+<h3 id="7runyourreactnativeapp">7. Run Your React Native App</h3>
+<p>After cleaning, run <strong><code>npx react-native run-android</code></strong> again to rebuild the project with the network security configuration.</p>
+<p>By following these steps, the error should be resolved, and your React Native app should be able to connect to the WebSocket server with the trusted SSL/TLS certificate.</p>

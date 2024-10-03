@@ -1,0 +1,28 @@
+{
+  "name": "django-reactnative-websocket-docs",
+  "version": "1.0.0",
+  "description": "Django React Native Websocket Documentations",
+  "main": "index.js",
+  "scripts": {
+    "convert-md": "node convert.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ajitaro/django-reactnative-websocket-docs.git"
+  },
+  "keywords": [
+    "django",
+    "react-native",
+    "websocket"
+  ],
+  "author": "ajitaro",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ajitaro/django-reactnative-websocket-docs/issues"
+  },
+  "homepage": "https://github.com/ajitaro/django-reactnative-websocket-docs#readme",
+  "dependencies": {
+    "showdown": "^2.1.0"
+  }
+}
