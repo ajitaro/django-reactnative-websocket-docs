@@ -2,7 +2,8 @@
   "name": "django-reactnative-websocket-docs",
   "version": "1.0.0",
   "description": "Django React Native Websocket Documentations",
-  "main": "index.js",
+  "main": "convert.js",
+  "type": "commonjs",
   "scripts": {
     "convert-md": "node convert.js",
     "test": "echo \"Error: no test specified\" && exit 1"
